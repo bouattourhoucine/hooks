@@ -1,5 +1,7 @@
 import React from 'react'
 import { Card ,Row } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+
 function MovieCard(props) {
   console.log(props.movie)
   return (
@@ -8,8 +10,7 @@ function MovieCard(props) {
  
 
     
-   
-  
+    <Link to={`/movie/${props.movie.id}`}>
         
   <Card className='Card' border="warning" style={{   width: "11rem", height: "25rem", marginRight: "30px", marginTop: "40px", backgroundColor: "lightyellow", borderRadius: "8px", }}>
   <Card.Img variant="top"  src={props.movie.poster} style={{borderRadius:"20%",width:"160px",textAlign:"center"}} />
@@ -22,7 +23,7 @@ function MovieCard(props) {
     
   </Card.Body>
 </Card>
-
+ </Link>
  )
 }
 

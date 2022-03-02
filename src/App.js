@@ -1,9 +1,13 @@
 import './App.css';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import NavBar from './compente/NavBar';
 import { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MovieList from './compente/MovieList'
-import Filter from './compente/Filter'
 import Add from './compente/Add'
+import Home from './compente/Home';
+import NavBarComponent from  './compente/NavBar'
+import MoviDetails from './compente/Movis';
 function App() {
 
   const [Movies, setMovies] = useState([{
@@ -67,22 +71,25 @@ function App() {
     rate: 3,
   }])
 
-  const addMovie=(Movie)=>{
-    setMovies([...Movies,Movie])
+  const addMovie = (Movie) => {
+    setMovies([...Movies, Movie])
   }
-  const onSeqrch=(carcter)=>
-  setMovies(Movies.filter((elt)=>elt.title.toLowerCase().includes((carcter.toLowerCase()))))
+  const onSeqrch = (carcter) =>
+    setMovies(Movies.filter((elt) => elt.title.toLowerCase().includes((carcter.toLowerCase()))))
 
   return (
-    <>
-   <Filter onSeqrch={onSeqrch}/>
-      <Add addMovie={addMovie} />
 
-      <MovieList Movies={Movies} />
 
-     
 
-    </>
+    <BrowserRouter>
+      <NavBarComponent  onSeqrch={onSeqrch} />
+      <Routes>
+        <Route path="/" element={<MovieList Movies={Movies} />} />
+        <Route path="/movie/:id" element={<MoviDetails Movies={Movies} />} />
+        <Route path="/Add" element={<Add addMovie={addMovie} />} />
+      </Routes>
+    </BrowserRouter>
+
 
 
   )
